@@ -107,7 +107,6 @@ class Provider {
         return patreonTierList
     }
 
-
     private fun getPatreonTitle(element: Element): String {
         return element.select("div.sc-AxjAm.kGRoiw").text()
     }
