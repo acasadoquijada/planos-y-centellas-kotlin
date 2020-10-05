@@ -2,10 +2,8 @@ package com.example.planosycentellas
 
 import com.example.planosycentellas.api.Provider
 import com.example.planosycentellas.model.Episode
-import com.example.planosycentellas.model.PatreonAwards
 import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
-import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -55,11 +53,6 @@ class ProviderUnitTest {
         assert(tier.link.isNotEmpty())
         assert(tier.price.isNotEmpty())
         assert(tier.title.isNotEmpty())
-        assertPatreonAwards(tier.awards)
-    }
-
-    private fun assertPatreonAwards(patreonAwards: PatreonAwards) {
-        assert(patreonAwards.initialMessage.isNotEmpty())
-        assert(patreonAwards.awardsDetails.isNotEmpty())
+        assert(tier.info.isNotEmpty())
     }
 }

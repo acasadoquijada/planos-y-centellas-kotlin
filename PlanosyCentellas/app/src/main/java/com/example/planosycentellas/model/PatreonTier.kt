@@ -5,6 +5,6 @@ class PatreonTier {
     var title: String = ""
     var image: String = ""
     var price: String = ""
-    var awards: PatreonAwards = PatreonAwards()
+    var info: String = ""
     var link: String  = ""
 }

@@ -1,16 +1,24 @@
 package com.example.planosycentellas
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import com.example.planosycentellas.api.Provider
 import com.example.planosycentellas.model.Episode
 import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
 import com.example.planosycentellas.repository.Repository
+import getOrAwaitValue
+import junit.framework.Assert.assertEquals
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
 
+@RunWith(JUnit4::class)
 class RepositoryUnitTest {
 
     private lateinit var provider: Provider
@@ -29,9 +37,8 @@ class RepositoryUnitTest {
 
         Mockito.`when`(provider.getPodcastInfo()).thenReturn(expectedPodcastInfo)
 
-        val actualPodcastInfo = repository.getPodcastInfo()
+        assertEquals(repository.getPodcastInfo(), expectedPodcastInfo)
 
-        Assert.assertEquals(actualPodcastInfo, expectedPodcastInfo)
     }
 
     @Test
@@ -41,9 +48,7 @@ class RepositoryUnitTest {
 
         Mockito.`when`(provider.getEpisodeList()).thenReturn(expectedEpisodeList)
 
-        val actualEpisodeList = repository.getEpisodeList()
-
-        Assert.assertEquals(actualEpisodeList, expectedEpisodeList)
+        assertEquals(repository.getEpisodeList(), expectedEpisodeList)
 
     }
 
@@ -52,9 +57,7 @@ class RepositoryUnitTest {
 
         Mockito.`when`(provider.getUpcoming()).thenReturn("upcoming")
 
-        val upcoming = repository.getUpcoming()
-
-        Assert.assertEquals(upcoming, "upcoming")
+        assertEquals(repository.getUpcoming(), "upcoming")
 
     }
 
@@ -65,9 +68,7 @@ class RepositoryUnitTest {
 
         Mockito.`when`(provider.getPatreonInfo()).thenReturn(expectedPatreonInfo)
 
-        val actualPatreonInfo = repository.getPatreonInfo()
-
-        Assert.assertEquals(actualPatreonInfo, expectedPatreonInfo)
+        Assert.assertEquals(repository.getPatreonInfo(), expectedPatreonInfo)
 
     }
 }
