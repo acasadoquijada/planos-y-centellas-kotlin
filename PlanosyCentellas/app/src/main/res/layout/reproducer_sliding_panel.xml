@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ru.rambler.libs.swipe_layout.SwipeLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        app:left_swipe_enabled="false"
+        app:right_swipe_enabled="true">
+
+        <!--CENTER. app:gravity="center" - is default value -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/slingindEpisodeImage"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground"
+                android:contentDescription="" />
+
+            <TextView
+                android:id="@+id/slidingName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                tools:text="Planos y pepinillos"
+                app:layout_constraintBottom_toTopOf="@+id/slingindEpisodeImage"
+                app:layout_constraintEnd_toStartOf="@+id/slidingMediaReproducer"
+                app:layout_constraintStart_toEndOf="@+id/slingindEpisodeImage"
+                app:layout_constraintTop_toBottomOf="@+id/slingindEpisodeImage"
+                app:layout_constraintVertical_bias="0.494" />
+
+            <ToggleButton
+                android:id="@+id/slidingMediaReproducer"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/slinding_reproducer_selector"
+                android:contentDescription=""
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintBottom_toTopOf="@+id/slingindEpisodeImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slingindEpisodeImage"
+                app:srcCompat="@drawable/ic_play_arrow" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--RIGHT-->
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text=""
+            app:bring_to_clamp="150dp"
+            app:clamp="self"
+            app:gravity="right" />
+    </ru.rambler.libs.swipe_layout.SwipeLayout>
+</layout>

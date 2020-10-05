@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Planos y Centellas</string>
+    <string name="bot_nav_home_text">Inicio</string>
+    <string name="bot_nav_search_text">Buscar</string>
+    <string name="bot_nav_news">Noticias</string>
+    <string name="episodeImageViewContentDescription">This is the episode image</string>
+    <string name="slidingMediaReproducerImageContentDescription">TODO</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="patreon_label_text">¿Quieres ayudar economicamente a Planos Y Centellas y tener acceso a contenido exlucivo?</string>
+    <string name="bot_nav_rr_ss">RRSS</string>
+    <string name="bot_nav_pateron">Patreon</string>
+    <string name="bot_nav_episodes_text">Episodios</string>
+    <string name="join_button_text">Unirse</string>
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/bot_nav_home_text"/>
+
+    <item
+        android:id="@+id/episodeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_microphone"
+        android:title="@string/bot_nav_episodes_text" />
+
+    <item
+        android:id="@+id/upcomingFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_new_releases"
+        android:title="@string/bot_nav_news"/>
+    <item
+        android:id="@+id/socialNetworkFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_marketing"
+        android:title="@string/bot_nav_rr_ss"/>
+
+    <item
+        android:id="@+id/patreonFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_patreon"
+        android:title="@string/bot_nav_pateron"/>
+
+
+</menu>
