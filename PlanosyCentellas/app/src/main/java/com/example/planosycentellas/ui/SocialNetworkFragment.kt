@@ -53,6 +53,11 @@ class SocialNetworkFragment : ParentFragment() {
         name.setOnClickListener {
             launchActivity(url)
         }
+
+        name.setOnLongClickListener {
+            shareURL(url)
+            true
+        }
     }
 
     private fun launchActivity(url: String) {
@@ -64,6 +69,20 @@ class SocialNetworkFragment : ParentFragment() {
         } else {
             Toast.makeText(requireContext(), "There is an error\nGo to: $url", Toast.LENGTH_SHORT)
                 .show()
+        }
+    }
+
+    private fun shareURL(url: String) {
+        val shareIntent = Intent.createChooser(createIntent(url), null)
+        startActivity(shareIntent)
+    }
+
+    private fun createIntent(url: String): Intent {
+
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url)
+            type = "text/plain"
         }
     }
 

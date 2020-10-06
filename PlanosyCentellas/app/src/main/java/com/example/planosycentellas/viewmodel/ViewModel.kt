@@ -1,6 +1,5 @@
 package com.example.planosycentellas.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
 import com.example.planosycentellas.model.Episode
@@ -8,9 +7,10 @@ import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
 import com.example.planosycentellas.repository.Repository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class ViewModel @Inject constructor(private var repository: Repository) : ViewModel() {
 
@@ -53,6 +53,23 @@ class ViewModel @Inject constructor(private var repository: Repository) : ViewMo
             setPatreonInfo()
         }
         return patreonInfo
+    }
+
+    fun searchEpisode(query: String): MutableLiveData<List<Episode>> {
+
+        val searchEpisodeListLiveData = MutableLiveData<List<Episode>>()
+        val searchEpisodeList = ArrayList<Episode>()
+
+
+        episodeList.value?.forEach { episode ->
+        if(episode.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
+            searchEpisodeList.add(episode)
+            }
+        }
+
+        searchEpisodeListLiveData.value = searchEpisodeList
+
+        return searchEpisodeListLiveData
     }
 
     private fun setPodcastInfo() = viewModelScope.launch(Dispatchers.IO) {

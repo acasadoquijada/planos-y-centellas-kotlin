@@ -60,7 +60,7 @@ class PatreonFragment : ParentFragment() {
             }
 
             setPatreonTierTitle(view.title, patreonTier.title)
-            setPatreonTierPrice(view.title, patreonTier.price)
+            setPatreonTierPrice(view.price, patreonTier.price)
             setPatreonTierImage(view.image, patreonTier.image)
             setJoinButtonOnClickListener(view.joinButton, patreonTier.link)
 

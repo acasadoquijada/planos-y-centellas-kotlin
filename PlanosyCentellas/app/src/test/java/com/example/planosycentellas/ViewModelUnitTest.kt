@@ -75,4 +75,21 @@ class ViewModelUnitTest {
         assertEquals(viewModel.getPatreonInfo().getOrAwaitValue(),expectedPatreonInfo)
     }
 
+    @Test
+    fun `Search Episode`() {
+
+        val episodeList = ArrayList<Episode>()
+
+        episodeList.add(Episode(title = "Matrix"))
+        episodeList.add(Episode(title = "Superman"))
+        episodeList.add(Episode(title = "Ironman"))
+
+        doReturn(episodeList).`when`(repository).getEpisodeList()
+
+        viewModel.getEpisodeList().getOrAwaitValue()
+
+        assertEquals(viewModel.searchEpisode("man").getOrAwaitValue().size, 2)
+    }
+
+
 }

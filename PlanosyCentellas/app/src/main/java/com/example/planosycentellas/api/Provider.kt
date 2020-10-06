@@ -1,5 +1,6 @@
 package com.example.planosycentellas.api
 
+import android.util.Log
 import com.example.planosycentellas.model.Episode
 import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
@@ -65,7 +66,8 @@ class Provider @Inject constructor(){
     }
 
     private fun getEpisodeUrl(element: Element): String {
-        return element.select("enclosure").attr("url")
+        return element.select("link").text()
+        //return element.select("enclosure").attr("url")
     }
 
     private fun getEpisodeImage(element: Element): String {
