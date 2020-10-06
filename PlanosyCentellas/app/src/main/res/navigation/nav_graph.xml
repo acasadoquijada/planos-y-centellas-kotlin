@@ -14,4 +14,13 @@
         android:id="@+id/upcomingFragment"
         android:name="com.example.planosycentellas.ui.UpcomingFragment"
         android:label="UpcomingFragment" />
+    <fragment
+        android:id="@+id/socialNetworkFragment"
+        android:name="com.example.planosycentellas.ui.SocialNetworkFragment"
+        android:label="SocialNetworkFragment" />
+    <fragment
+        android:id="@+id/patreonFragment"
+        android:name="com.example.planosycentellas.ui.PatreonFragment"
+        android:label="fragment_patreon"
+        tools:layout="@layout/fragment_patreon" />
 </navigation>

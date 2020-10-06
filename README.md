@@ -38,6 +38,8 @@ The purpose of this application is to gather all the relevant information about 
 
 * Microphone logo made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect/) in [Flaticon](https://www.flaticon.com/)
 
+* Twitch logo made by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect/) in [Flaticon](https://www.flaticon.com/)
+
 * Social Network logo made by [Vitaly Gorbachev](https://www.flaticon.com/free-icon/share_2301269?term=social%20network&page=7&position=88) in [Flaticon](https://www.flaticon.com/)
 
 * Itunes logo obatined from [here](https://upload.wikimedia.org/wikipedia/commons/d/df/ITunes_logo.svg)
