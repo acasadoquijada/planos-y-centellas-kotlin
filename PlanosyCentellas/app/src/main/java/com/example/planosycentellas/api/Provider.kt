@@ -1,6 +1,5 @@
 package com.example.planosycentellas.api
 
-import android.util.Log
 import com.example.planosycentellas.model.Episode
 import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
@@ -12,15 +11,15 @@ import javax.inject.Inject
 
 class Provider @Inject constructor(){
 
-    private val ivoox_url = "https://www.ivoox.com/podcast-planos-centellas_fg_f1609149_filtro_1.xml"
-    private val ivoox_news_url = "https://www.ivoox.com/planos-centellas_pr_posts_609149_1.html"
-    private val patreon_url = "https://www.patreon.com/planosycentellas"
+    private val ivooxUrl = "https://www.ivoox.com/podcast-planos-centellas_fg_f1609149_filtro_1.xml"
+    private val ivooxNewsUrl = "https://www.ivoox.com/planos-centellas_pr_posts_609149_1.html"
+    private val patreonUrl = "https://www.patreon.com/planosycentellas"
 
     fun getPodcastInfo(): PodcastInfo {
 
         val podcastInfo = PodcastInfo()
 
-        val doc = Jsoup.connect(ivoox_url).get().parser(Parser.xmlParser())
+        val doc = Jsoup.connect(ivooxUrl).get().parser(Parser.xmlParser())
 
         podcastInfo.description = doc.select("description")[0].text()
 
@@ -35,7 +34,7 @@ class Provider @Inject constructor(){
 
         val episodeList: MutableList<Episode> = ArrayList()
 
-        val doc = Jsoup.connect(ivoox_url).get().parser(Parser.xmlParser())
+        val doc = Jsoup.connect(ivooxUrl).get().parser(Parser.xmlParser())
 
         val elements = doc.select("item")
 
@@ -75,7 +74,7 @@ class Provider @Inject constructor(){
     }
 
     fun getUpcoming(): String {
-        val doc = Jsoup.connect(ivoox_news_url).get()
+        val doc = Jsoup.connect(ivooxNewsUrl).get()
 
         val elements = doc.select("div.container.container-xl")
 
@@ -86,7 +85,7 @@ class Provider @Inject constructor(){
 
         val patreonTierList: MutableList<PatreonTier> = ArrayList()
 
-        val doc = Jsoup.connect(patreon_url).get()
+        val doc = Jsoup.connect(patreonUrl).get()
 
         val elements = doc.select("div.sc-fzoLsD.cCFuMf")
 

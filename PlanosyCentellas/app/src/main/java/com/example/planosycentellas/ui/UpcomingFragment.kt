@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.*
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.example.planosycentellas.R
 import com.example.planosycentellas.databinding.FragmentUpcomingBinding
 import com.squareup.picasso.Picasso

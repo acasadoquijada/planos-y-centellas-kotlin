@@ -1,17 +1,13 @@
 package com.example.planosycentellas
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import com.example.planosycentellas.api.Provider
 import com.example.planosycentellas.model.Episode
 import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
 import com.example.planosycentellas.repository.Repository
-import getOrAwaitValue
 import junit.framework.Assert.assertEquals
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

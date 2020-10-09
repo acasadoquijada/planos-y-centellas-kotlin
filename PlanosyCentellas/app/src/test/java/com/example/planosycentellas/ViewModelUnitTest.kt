@@ -6,7 +6,7 @@ import com.example.planosycentellas.model.PatreonTier
 import com.example.planosycentellas.model.PodcastInfo
 import com.example.planosycentellas.repository.Repository
 import com.example.planosycentellas.viewmodel.ViewModel
-import getOrAwaitValue
+import com.example.planosycentellas.util.getOrAwaitValue
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule

@@ -1,23 +1,15 @@
 package com.example.planosycentellas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.example.planosycentellas.api.Provider
 import com.example.planosycentellas.databinding.ActivityMainBinding
-import com.example.planosycentellas.di.MyApplication
-import com.example.planosycentellas.repository.Repository
-import com.example.planosycentellas.viewmodel.ViewModel
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mBinding: ActivityMainBinding
+    private lateinit var mBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

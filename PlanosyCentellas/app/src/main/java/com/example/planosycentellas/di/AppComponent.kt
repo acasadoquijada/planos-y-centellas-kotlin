@@ -2,7 +2,6 @@ package com.example.planosycentellas.di
 
 import android.content.Context
 import com.example.planosycentellas.MainActivity
-import com.example.planosycentellas.ui.HomeFragment
 import com.example.planosycentellas.ui.ParentFragment
 import dagger.BindsInstance
 import dagger.Component

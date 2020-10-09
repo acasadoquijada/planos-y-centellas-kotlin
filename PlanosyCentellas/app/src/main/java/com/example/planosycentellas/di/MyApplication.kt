@@ -1,10 +1,6 @@
 package com.example.planosycentellas.di
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
-import com.example.planosycentellas.repository.Repository
-import com.example.planosycentellas.viewmodel.ViewModel
-import javax.inject.Inject
 
 open class MyApplication : Application() {
 
