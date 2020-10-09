@@ -16,12 +16,13 @@ import com.example.planosycentellas.di.MyApplication
 import com.example.planosycentellas.viewmodel.ViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.patreon_tier.*
 import javax.inject.Inject
 
 
 class HomeFragment : ParentFragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var binding: FragmentHomeBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +30,7 @@ class HomeFragment : ParentFragment() {
         savedInstanceState: Bundle?
     ): View? {
         setupDataBinding(inflater, container)
+
         return getRootView()
     }
 
@@ -36,8 +38,8 @@ class HomeFragment : ParentFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
     }
 
-    override fun getRootView(): View {
-        return binding.root
+    override fun getRootView(): View? {
+        return binding?.root
     }
 
     override fun setupUI() {
@@ -45,7 +47,7 @@ class HomeFragment : ParentFragment() {
     }
 
     private fun observePodcastInfo() {
-        viewModel.getPodcastInfo().observe(requireActivity(), {
+        viewModel.getPodcastInfo().observe(this, {
             setTitle(it.name)
             setContactInfo(it.email)
             setDescription(it.description)
@@ -54,18 +56,23 @@ class HomeFragment : ParentFragment() {
     }
 
     private fun setTitle(title: String) {
-        binding.title.text = title
+        binding?.title?.text = title
     }
 
     private fun setContactInfo(contactInfo: String) {
-        binding.contactInfo.text = contactInfo
+        binding?.contactInfo?.text = contactInfo
     }
 
     private fun setDescription(description: String) {
-        binding.description.text = description
+        binding?.description?.text = description
     }
 
     private fun setPodcastImage(imagePath: String) {
-        Picasso.get().load(imagePath).into(binding.podcastImage)
+        Picasso.get().load(imagePath).into(binding?.podcastImage)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

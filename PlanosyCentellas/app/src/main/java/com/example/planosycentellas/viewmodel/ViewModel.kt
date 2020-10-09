@@ -60,7 +60,6 @@ class ViewModel @Inject constructor(private var repository: Repository) : ViewMo
         val searchEpisodeListLiveData = MutableLiveData<List<Episode>>()
         val searchEpisodeList = ArrayList<Episode>()
 
-
         episodeList.value?.forEach { episode ->
         if(episode.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
             searchEpisodeList.add(episode)

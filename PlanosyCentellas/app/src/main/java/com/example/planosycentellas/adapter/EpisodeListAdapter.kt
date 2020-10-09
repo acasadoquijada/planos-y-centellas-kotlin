@@ -8,13 +8,19 @@ import com.example.planosycentellas.databinding.EpisodeBinding
 import com.example.planosycentellas.model.Episode
 import com.squareup.picasso.Picasso
 
-class EpisodeListAdapter(listener: EpisodeClickListener): RecyclerView.Adapter<EpisodeListAdapter.EpisodeHolder>() {
+class EpisodeListAdapter(listener: EpisodeClickListener, longListener: EpisodeLongClickListener):
+    RecyclerView.Adapter<EpisodeListAdapter.EpisodeHolder>() {
 
     private var episodeList: List<Episode> = ArrayList()
     private var episodeClickListener: EpisodeClickListener = listener
+    private var episodeLongClickListener: EpisodeLongClickListener = longListener
 
     interface EpisodeClickListener {
         fun onEpisodeClicked(url: String)
+    }
+
+    interface EpisodeLongClickListener {
+        fun onEpisodeLongClicked(url: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeHolder {
@@ -39,12 +45,13 @@ class EpisodeListAdapter(listener: EpisodeClickListener): RecyclerView.Adapter<E
     }
 
     inner class EpisodeHolder(episodeBinding: EpisodeBinding): RecyclerView.ViewHolder(episodeBinding.root),
-        View.OnClickListener {
+        View.OnClickListener, View.OnLongClickListener {
 
         private val binding: EpisodeBinding = episodeBinding
 
         init {
             binding.root.setOnClickListener(this)
+            binding.root.setOnLongClickListener(this)
         }
 
         fun bind(name: String, image: String) {
@@ -62,6 +69,11 @@ class EpisodeListAdapter(listener: EpisodeClickListener): RecyclerView.Adapter<E
 
         override fun onClick(p0: View?) {
             episodeClickListener.onEpisodeClicked(episodeList[adapterPosition].url)
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            episodeLongClickListener.onEpisodeLongClicked(episodeList[adapterPosition].url)
+            return true
         }
     }
 }

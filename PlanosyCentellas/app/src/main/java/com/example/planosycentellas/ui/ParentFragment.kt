@@ -13,6 +13,11 @@ import com.example.planosycentellas.di.MyApplication
 import com.example.planosycentellas.viewmodel.ViewModel
 import javax.inject.Inject
 
+/*
+class FragmentViewBindingProperty<T : ViewBinding>(
+    private val viewBinder: ViewBinder<T>
+) : ReadOnlyProperty<Fragment, T>
+ */
 abstract class ParentFragment: Fragment() {
 
     @Inject
@@ -22,7 +27,7 @@ abstract class ParentFragment: Fragment() {
 
     abstract fun setupDataBinding(inflater: LayoutInflater, container: ViewGroup?)
 
-    abstract fun getRootView(): View
+    abstract fun getRootView(): View?
 
     override fun onAttach(context: Context) {
         (requireActivity().application as MyApplication).appComponent.inject(this)

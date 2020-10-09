@@ -20,7 +20,7 @@ import java.io.IOException
 
 class UpcomingFragment : ParentFragment() {
 
-    private lateinit var binding: FragmentUpcomingBinding
+    private var binding: FragmentUpcomingBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,13 +35,13 @@ class UpcomingFragment : ParentFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_upcoming, container, false)
     }
 
-    override fun getRootView(): View {
-        return binding.root
+    override fun getRootView(): View? {
+        return binding?.root
     }
 
     override fun setupUI() {
-        viewModel.getUpcoming().observe(requireActivity(), {
-            Picasso.get().load(it).into(binding.upcomingImage)
+        viewModel.getUpcoming().observe(this, {
+            Picasso.get().load(it).into(binding?.upcomingImage)
         })
     }
 
@@ -68,7 +68,7 @@ class UpcomingFragment : ParentFragment() {
 
     private fun shareUpcomingImage() {
 
-        val bitmap = getBitmapFromView(binding.upcomingImage)
+        val bitmap = binding?.upcomingImage?.let { getBitmapFromView(it) }
 
         bitmap?.let {
             val uri = saveImage(bitmap)
@@ -118,5 +118,9 @@ class UpcomingFragment : ParentFragment() {
         startActivity(shareIntent)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 
 }

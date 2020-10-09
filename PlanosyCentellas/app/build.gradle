@@ -66,7 +66,7 @@ dependencies {
     testImplementation 'android.arch.core:core-testing:1.1.1'
 
     // coroutines
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha07'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01'
 
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"

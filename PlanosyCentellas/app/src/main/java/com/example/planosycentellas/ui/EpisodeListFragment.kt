@@ -3,21 +3,20 @@ package com.example.planosycentellas.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.planosycentellas.R
 import com.example.planosycentellas.adapter.EpisodeListAdapter
 import com.example.planosycentellas.databinding.FragmentEpisodeListBinding
 import com.example.planosycentellas.model.Episode
 
-class EpisodeListFragment : ParentFragment(), EpisodeListAdapter.EpisodeClickListener {
+class EpisodeListFragment : ParentFragment(),
+    EpisodeListAdapter.EpisodeClickListener, EpisodeListAdapter.EpisodeLongClickListener {
 
-    private lateinit var binding: FragmentEpisodeListBinding
+    private var binding: FragmentEpisodeListBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +35,8 @@ class EpisodeListFragment : ParentFragment(), EpisodeListAdapter.EpisodeClickLis
         )
     }
 
-    override fun getRootView(): View {
-        return binding.root
+    override fun getRootView(): View ? {
+        return binding?.root
     }
 
     override fun setupUI() {
@@ -51,22 +50,44 @@ class EpisodeListFragment : ParentFragment(), EpisodeListAdapter.EpisodeClickLis
     }
 
     private fun setupAdapter() {
-        binding.episodeListRecyclerView.adapter = EpisodeListAdapter(this)
+        binding?.episodeListRecyclerView?.adapter = EpisodeListAdapter(this, this)
     }
 
     private fun setupLayoutManager() {
-        binding.episodeListRecyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
+        binding?.episodeListRecyclerView?.layoutManager = GridLayoutManager(requireContext(), 1)
     }
 
     private fun observeEpisodeList() {
-        viewModel.getEpisodeList().observe(requireActivity(), {
-            Log.d("TESTING_", "list size: " + it.size)
-            (binding.episodeListRecyclerView.adapter as EpisodeListAdapter).setEpisodeList(it)
+        viewModel.getEpisodeList().observe(this, {
+            updateEpisodeListAdapter(it)
         })
+    }
+
+    private fun updateEpisodeListAdapter(episodeList: List<Episode>) {
+        (binding?.episodeListRecyclerView?.adapter as EpisodeListAdapter).setEpisodeList(episodeList)
     }
 
     override fun onEpisodeClicked(url: String) {
         launchActivity(url)
+    }
+
+    override fun onEpisodeLongClicked(url: String) {
+        val string = "Esucha este episodio de Planos y Centellas: $url"
+        shareURL(string)
+    }
+
+    private fun shareURL(url: String) {
+        val shareIntent = Intent.createChooser(createIntent(url), null)
+        startActivity(shareIntent)
+    }
+
+    private fun createIntent(url: String): Intent {
+
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url)
+            type = "text/plain"
+        }
     }
 
     private fun launchActivity(url: String) {
@@ -121,8 +142,6 @@ class EpisodeListFragment : ParentFragment(), EpisodeListAdapter.EpisodeClickLis
              */
             override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
                 searchView?.setQuery("", false)
-               // viewModel.cleanQuery()
-              //  setRegularTitlesAndUpdateRightAdapterType()
                 return true
             }
         })
@@ -135,20 +154,25 @@ class EpisodeListFragment : ParentFragment(), EpisodeListAdapter.EpisodeClickLis
             }
 
             override fun onQueryTextChange(s: String): Boolean {
-                return handleQueryChangeAndUpdateUI(s)
+                return handleQueryChange(s)
             }
         })
     }
 
-    private fun handleQueryChangeAndUpdateUI(query: String): Boolean {
+    private fun handleQueryChange(query: String): Boolean {
         updateAdapterElements(query)
         return false
     }
 
     private fun updateAdapterElements(query: String) {
-        viewModel.searchEpisode(query).observe(requireActivity(), {
-            (binding.episodeListRecyclerView.adapter as EpisodeListAdapter).setEpisodeList(it)
+        viewModel.searchEpisode(query).observe(this, {
+            updateEpisodeListAdapter(it)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }

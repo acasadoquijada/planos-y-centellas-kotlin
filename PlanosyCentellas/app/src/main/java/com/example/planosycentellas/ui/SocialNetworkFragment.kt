@@ -15,7 +15,7 @@ import com.example.planosycentellas.model.SocialNetwork
 
 class SocialNetworkFragment : ParentFragment() {
 
-    private lateinit var binding: FragmentSocialNetworkBinding
+    private var binding: FragmentSocialNetworkBinding? = null
 
     private val socialNetworkList: MutableList<SocialNetwork> = ArrayList()
 
@@ -39,8 +39,8 @@ class SocialNetworkFragment : ParentFragment() {
         )
     }
 
-    override fun getRootView(): View {
-        return binding.root
+    override fun getRootView(): View? {
+        return binding?.root
     }
 
     override fun setupUI() {
@@ -49,12 +49,12 @@ class SocialNetworkFragment : ParentFragment() {
         }
     }
 
-    private fun setupListener(name: ImageView, url: String) {
-        name.setOnClickListener {
+    private fun setupListener(name: ImageView?, url: String) {
+        name?.setOnClickListener {
             launchActivity(url)
         }
 
-        name.setOnLongClickListener {
+        name?.setOnLongClickListener {
             shareURL(url)
             true
         }
@@ -97,13 +97,18 @@ class SocialNetworkFragment : ParentFragment() {
         val spotifyUrl = "https://open.spotify.com/show/78SRCbyUZei41U33ZkVDme"
         val twitchUrl = "https://www.twitch.tv/planos_y_centellas"
 
-        socialNetworkList.add(SocialNetwork(binding.ivoox, ivooxUrl))
-        socialNetworkList.add(SocialNetwork(binding.instagram, instagramUrl))
-        socialNetworkList.add(SocialNetwork(binding.youtube, youtubeUrl))
-        socialNetworkList.add(SocialNetwork(binding.facebook, facebookUrl))
-        socialNetworkList.add(SocialNetwork(binding.itunes, itunesUrl))
-        socialNetworkList.add(SocialNetwork(binding.twitter, twitterUrl))
-        socialNetworkList.add(SocialNetwork(binding.spotify, spotifyUrl))
-        socialNetworkList.add(SocialNetwork(binding.twitch, twitchUrl))
+        socialNetworkList.add(SocialNetwork(binding?.ivoox, ivooxUrl))
+        socialNetworkList.add(SocialNetwork(binding?.instagram, instagramUrl))
+        socialNetworkList.add(SocialNetwork(binding?.youtube, youtubeUrl))
+        socialNetworkList.add(SocialNetwork(binding?.facebook, facebookUrl))
+        socialNetworkList.add(SocialNetwork(binding?.itunes, itunesUrl))
+        socialNetworkList.add(SocialNetwork(binding?.twitter, twitterUrl))
+        socialNetworkList.add(SocialNetwork(binding?.spotify, spotifyUrl))
+        socialNetworkList.add(SocialNetwork(binding?.twitch, twitchUrl))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

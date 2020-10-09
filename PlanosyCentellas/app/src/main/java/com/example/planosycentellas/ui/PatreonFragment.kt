@@ -3,6 +3,7 @@ package com.example.planosycentellas.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.example.planosycentellas.R
 import com.example.planosycentellas.databinding.FragmentPatreonBinding
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.patreon_tier.view.*
 
 class PatreonFragment : ParentFragment() {
 
-    private lateinit var binding: FragmentPatreonBinding
+    private var binding: FragmentPatreonBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +37,13 @@ class PatreonFragment : ParentFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_patreon, container,false)
     }
 
-    override fun getRootView(): View {
-        return binding.root
+    override fun getRootView(): View?{
+        return binding?.root
     }
 
     override fun setupUI() {
 
-        viewModel.getPatreonInfo().observe(requireActivity(), { patreonInfo: List<PatreonTier> ->
+        viewModel.getPatreonInfo().observe(this, { patreonInfo: List<PatreonTier> ->
             patreonInfo.forEachIndexed{
                     index, element -> setupPatreonTierInfo(element, index)
             }
@@ -52,37 +54,38 @@ class PatreonFragment : ParentFragment() {
 
         try {
 
-            val view: View = when(index) {
-                0 -> binding.patreonTier1
-                1 -> binding.patreonTier2
-                2 -> binding.patreonTier3
+            val view: View? = when(index) {
+                0 -> binding?.patreonTier1
+                1 -> binding?.patreonTier2
+                2 -> binding?.patreonTier3
                 else -> throw Exception("index out of bounds: $index")
             }
 
-            setPatreonTierTitle(view.title, patreonTier.title)
-            setPatreonTierPrice(view.price, patreonTier.price)
-            setPatreonTierImage(view.image, patreonTier.image)
-            setJoinButtonOnClickListener(view.joinButton, patreonTier.link)
+            setPatreonTierTitle(view?.title, patreonTier.title)
+            setPatreonTierPrice(view?.price, patreonTier.price)
+            setPatreonTierImage(view?.image, patreonTier.image)
+            setJoinButtonOnClickListener(view?.joinButton, patreonTier.link)
 
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun setPatreonTierTitle(view: TextView, title: String) {
-        view.text = title
+    private fun setPatreonTierTitle(view: TextView?, title: String) {
+        view?.text = title
     }
 
-    private fun setPatreonTierPrice(view: TextView, price: String) {
-        view.text = price
+    private fun setPatreonTierPrice(view: TextView?, price: String) {
+        view?.text = price
     }
 
-    private fun setPatreonTierImage(view: ImageView, image: String) {
+    private fun setPatreonTierImage(view: ImageView?, image: String) {
+        Log.d("PATREON", image)
         Picasso.get().load(image).resize(150,150).into(view)
     }
 
-    private fun setJoinButtonOnClickListener(button: Button, link: String) {
-        button.setOnClickListener{
+    private fun setJoinButtonOnClickListener(button: Button?, link: String) {
+        button?.setOnClickListener{
             launchActivity(link)
         }
     }
@@ -97,5 +100,10 @@ class PatreonFragment : ParentFragment() {
             Toast.makeText(requireContext(), "There is an error\nGo to: $url", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
